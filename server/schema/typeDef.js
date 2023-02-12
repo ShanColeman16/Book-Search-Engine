@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    bookCount: Int
     savedBooks: [Book]
   }
 
@@ -22,6 +23,11 @@ const typeDefs = gql`
   type Query {
     getSingleUser(id: ID, username: String): User
   }
+  type Auth:  {
+    token: ID!
+  user: User
+  }
+ 
 `
 
 module.exports = typeDefs;
