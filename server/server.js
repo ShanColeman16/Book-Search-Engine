@@ -5,7 +5,7 @@ const db = require('./config/connection');
 // Import the ApolloServer class
 const { ApolloServer } = require('apollo-server-express');
 // Import the two parts of a GraphQL schema
-const { typeDefs, resolvers } = require('./schema');
+const { typeDefs, resolvers } = require('./schemas');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -33,6 +33,9 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
+
+
   
   db.once('open', () => {
     app.listen(PORT, () => {
