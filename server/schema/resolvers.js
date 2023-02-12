@@ -13,6 +13,35 @@ const resolvers = {
     });
     return foundUser;
    },
+  },
+
+  Mutation: {
+    async createUser( _parent, args) {
+      const user = await User.create(body);
+      const token = signToken(user);
+
+      return { user, token};
+    },
+    async login({ _parent }, email, password) {
+      const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
+      if (!user) {
+        return res.status(400).json({ message: "Can't find this user" });
+      }
+  
+      const correctPw = await user.isCorrectPassword(body.password);
+  
+      if (!correctPw) {
+        return res.status(400).json({ message: 'Wrong password!' });
+      }
+      const token = signToken(user);
+      res.json({ token, user });
+    },
+
+
+
+
+    
+
   }
 };
 
