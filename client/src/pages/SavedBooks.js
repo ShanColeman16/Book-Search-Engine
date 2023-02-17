@@ -12,7 +12,7 @@ const SavedBooks = () => {
   const userData = data?.me || [];
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  // const userDataLength = Object.keys(userData).length;
 
     const handleDeleteBook = async (bookId) => {
       const token = Auth.loggedIn() ? Auth.getToken() : null;
